@@ -20,11 +20,11 @@ export default function VideoIntro() {
   const controlsRef = useRef<HTMLDivElement>(null);
   const scrollIndicatorRef = useRef<HTMLButtonElement>(null);
   const soundBadgeRef = useRef<HTMLDivElement>(null);
-  const scrollIndicatorRef = useRef<HTMLButtonElement>(null);
   const [muted, setMuted] = useState(false);
   const [playing, setPlaying] = useState(true);
   const [showSoundHint, setShowSoundHint] = useState(true);
   const soundHideTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
   /* ── Stop video on scroll away ── */
   useEffect(() => {
     const onScroll = () => {
@@ -45,14 +45,12 @@ export default function VideoIntro() {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ delay: 0.3 });
 
-      // Hero fade in
       tl.fromTo(
         sectionRef.current,
         { opacity: 0 },
         { opacity: 1, duration: 1.8, ease: "power2.inOut" }
       );
 
-      // Tagline
       tl.fromTo(
         taglineRef.current,
         { opacity: 0, y: 14, letterSpacing: "0.5em" },
@@ -60,7 +58,6 @@ export default function VideoIntro() {
         "-=0.9"
       );
 
-      // First name slides in from left
       tl.fromTo(
         firstNameRef.current,
         { opacity: 0, x: -60, skewX: -4 },
@@ -68,7 +65,6 @@ export default function VideoIntro() {
         "-=0.7"
       );
 
-      // Last name slides in from right
       tl.fromTo(
         lastNameRef.current,
         { opacity: 0, x: 60, skewX: 4 },
@@ -76,7 +72,6 @@ export default function VideoIntro() {
         "-=1.2"
       );
 
-      // Role subtitle
       tl.fromTo(
         roleRef.current,
         { opacity: 0, y: 20 },
@@ -84,7 +79,6 @@ export default function VideoIntro() {
         "-=0.8"
       );
 
-      // Controls
       tl.fromTo(
         controlsRef.current,
         { opacity: 0, y: 10 },
@@ -92,7 +86,6 @@ export default function VideoIntro() {
         "-=0.5"
       );
 
-      // Scroll indicator
       tl.fromTo(
         scrollIndicatorRef.current,
         { opacity: 0 },
@@ -124,7 +117,7 @@ export default function VideoIntro() {
   }, []);
 
   /* ── Mute/unmute ── */
-const toggleMute = useCallback(() => {
+  const toggleMute = useCallback(() => {
     setMuted((prev) => {
       const next = !prev;
       if (bgVideoRef.current) bgVideoRef.current.muted = next;
@@ -137,7 +130,6 @@ const toggleMute = useCallback(() => {
       }
       return next;
     });
-    // Hide the sound hint immediately on first interaction
     if (showSoundHint && soundBadgeRef.current) {
       if (soundHideTimer.current) clearTimeout(soundHideTimer.current);
       gsap.to(soundBadgeRef.current, {
@@ -173,7 +165,6 @@ const toggleMute = useCallback(() => {
   return (
     <section ref={sectionRef} className={styles.hero} aria-label="Portfolio hero">
 
-      {/* ── Ambient blurred background video ── */}
       <div className={styles.bgVideoWrap} aria-hidden="true">
         <video
           ref={bgVideoRef}
@@ -187,17 +178,14 @@ const toggleMute = useCallback(() => {
         <div className={styles.bgVideoScrim} />
       </div>
 
-      {/* ── Three.js cinematic particle layer ── */}
       <CinematicLayer />
 
-      {/* ── Cinematic gradient overlays ── */}
       <div className={styles.gradientLeft} aria-hidden="true" />
       <div className={styles.gradientRight} aria-hidden="true" />
       <div className={styles.gradientBottom} aria-hidden="true" />
       <div className={styles.gradientTop} aria-hidden="true" />
       <div className={styles.vignetteRing} aria-hidden="true" />
 
-      {/* ── Foreground video (subject) ── */}
       <div className={styles.fgVideoWrap}>
         <video
           ref={fgVideoRef}
@@ -208,11 +196,9 @@ const toggleMute = useCallback(() => {
           playsInline
           preload="auto"
         />
-        {/* Subtle mask blend on edges */}
         <div className={styles.fgVideoMask} aria-hidden="true" />
       </div>
 
-      {/* ── Overlay content ── */}
       <div ref={overlayRef} className={styles.overlay} aria-hidden="true" />
 
       <div ref={contentRef} className={styles.content}>
@@ -220,7 +206,7 @@ const toggleMute = useCallback(() => {
           Data Analyst &amp; AI/ML Enthusiast
         </span>
 
-        <h1 className={styles.name} aria-label="Alex Mercer">
+        <h1 className={styles.name} aria-label="Hemanth Kumar Polavaram">
           <div ref={firstNameRef} className={styles.firstName}>Hemanth Kumar</div>
           <div ref={lastNameRef} className={styles.lastName}>Polavaram</div>
         </h1>
@@ -232,8 +218,13 @@ const toggleMute = useCallback(() => {
         </p>
       </div>
 
-      {/* ── Controls ── */}
-	<div ref={controlsRef} className={styles.controls} role="group" aria-label="Video controls" style={{position:'fixed', bottom:'2rem', right:'2rem', zIndex:9999}}>
+      <div
+        ref={controlsRef}
+        className={styles.controls}
+        role="group"
+        aria-label="Video controls"
+        style={{position:'fixed', bottom:'2rem', right:'2rem', zIndex:9999}}
+      >
         <button
           className={styles.controlBtn}
           onClick={togglePlay}
@@ -273,7 +264,6 @@ const toggleMute = useCallback(() => {
         </button>
       </div>
 
-      {/* ── Sound hint badge ── */}
       {showSoundHint && (
         <div ref={soundBadgeRef} className={styles.soundBadge} onClick={toggleMute} role="button" tabIndex={0} aria-label="Tap to toggle sound">
           <span className={styles.soundDot} aria-hidden="true" />
@@ -281,9 +271,8 @@ const toggleMute = useCallback(() => {
         </div>
       )}
 
-      {/* ── Scroll indicator ── */}
       <button
-        ref={scrollIndicatorRef as React.RefObject<HTMLButtonElement>}
+        ref={scrollIndicatorRef}
         className={styles.scrollIndicator}
         onClick={scrollDown}
         aria-label="Scroll to work section"
