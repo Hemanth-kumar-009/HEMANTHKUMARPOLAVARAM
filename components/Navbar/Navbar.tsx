@@ -73,7 +73,7 @@ export default function Navbar() {
         </ul>
 
         {/* CTA */}
-       <a href="mailto:polavaramhemanthkumar@gmail.com?subject=Hiring%20Inquiry%20-%20Hemanth%20Polavaram&body=Hi%20Hemanth%2C%20I%20would%20like%20to%20discuss%20an%20opportunity%20with%20you." className={styles.cta}>
+       <a href="https://mail.google.com/mail/?view=cm&to=polavaramhemanthkumar@gmail.com&su=Hiring%20Inquiry%20-%20Hemanth%20Polavaram&body=Hi%20Hemanth%2C%20I%20would%20like%20to%20discuss%20an%20opportunity%20with%20you." target="_blank" rel="noopener noreferrer" className={styles.cta}>
           Hire me
         </a>
 
@@ -99,7 +99,7 @@ export default function Navbar() {
             </li>
           ))}
           <li>
-            <a href="mailto:polavaramhemanthkumar@gmail.com" className={styles.drawerCta}>
+            <a href="https://mail.google.com/mail/?view=cm&to=polavaramhemanthkumar@gmail.com&su=Hiring%20Inquiry%20-%20Hemanth%20Polavaram&body=Hi%20Hemanth%2C%20I%20would%20like%20to%20discuss%20an%20opportunity%20with%20you." target="_blank" rel="noopener noreferrer" className={styles.cta}>
               Hire me
             </a>
           </li>
