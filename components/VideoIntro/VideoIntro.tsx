@@ -18,9 +18,9 @@ export default function VideoIntro() {
   const lastNameRef = useRef<HTMLDivElement>(null);
   const roleRef = useRef<HTMLParagraphElement>(null);
   const controlsRef = useRef<HTMLDivElement>(null);
-  const scrollIndicatorRef = useRef<HTMLDivElement>(null);
+  const scrollIndicatorRef = useRef<HTMLButtonElement>(null);
   const soundBadgeRef = useRef<HTMLDivElement>(null);
-
+  const scrollIndicatorRef = useRef<HTMLButtonElement>(null);
   const [muted, setMuted] = useState(false);
   const [playing, setPlaying] = useState(true);
   const [showSoundHint, setShowSoundHint] = useState(true);
