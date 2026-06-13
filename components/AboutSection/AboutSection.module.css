@@ -1,0 +1,209 @@
+/* ══════════════════════════════════════════════
+   AboutSection.module.css
+   ══════════════════════════════════════════════ */
+
+.section {
+  position: relative;
+  background: var(--c-deep);
+  padding: clamp(6rem, 12vh, 10rem) 0 clamp(5rem, 10vh, 8rem);
+  overflow: hidden;
+}
+
+.ambientLeft {
+  position: absolute;
+  top: 20%;
+  left: -10%;
+  width: 50%;
+  height: 70%;
+  background: radial-gradient(ellipse, rgba(232,160,80,0.045) 0%, transparent 70%);
+  pointer-events: none;
+  filter: blur(2px);
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 clamp(1.5rem, 5vw, 4rem);
+}
+
+/* ── Split ── */
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(4rem, 8vw, 8rem);
+  margin-bottom: clamp(5rem, 10vh, 8rem);
+}
+
+@media (max-width: 900px) {
+  .split { grid-template-columns: 1fr; gap: 3.5rem; }
+}
+
+/* ── Left ── */
+.left { display: flex; flex-direction: column; gap: 0; }
+
+.eyebrow {
+  display: block;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--c-amber);
+  opacity: 0.8;
+  margin-bottom: 1.4rem;
+}
+
+.eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 1.6em;
+  height: 1px;
+  background: currentColor;
+  vertical-align: middle;
+  margin-right: 0.65em;
+  opacity: 0.55;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 4.5vw, 4.8rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  color: var(--c-white);
+  margin-bottom: 2rem;
+}
+
+.title em {
+  font-style: italic;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(244,240,234,0.5);
+}
+
+.body {
+  font-size: clamp(0.88rem, 1.1vw, 0.97rem);
+  line-height: 1.85;
+  color: var(--c-muted);
+  font-weight: 300;
+  margin-bottom: 1.2rem;
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 1.8rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--c-amber);
+  text-decoration: none;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid rgba(232,160,80,0.3);
+  transition: border-color 0.3s ease, color 0.3s ease, gap 0.3s ease;
+}
+
+.cta:hover {
+  border-color: var(--c-amber);
+  color: #f5c07a;
+  gap: 0.7rem;
+}
+
+/* ── Right ── */
+.right { display: flex; flex-direction: column; gap: 2.5rem; padding-top: 0.5rem; }
+
+/* Skills */
+.skillsBlock {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 4px;
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.blockLabel {
+  display: block;
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--c-amber);
+  opacity: 0.7;
+  margin-bottom: 1.5rem;
+}
+
+.skillList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.skillItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.88rem;
+  font-weight: 300;
+  color: rgba(244,240,234,0.55);
+  padding: 0.65rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  transition: color 0.3s ease;
+  letter-spacing: 0.02em;
+}
+
+.skillItem:last-child { border-bottom: none; }
+.skillItem:hover { color: var(--c-white); }
+
+.skillDot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--c-amber);
+  opacity: 0.5;
+  flex-shrink: 0;
+  transition: opacity 0.3s ease;
+}
+
+.skillItem:hover .skillDot { opacity: 1; }
+
+/* ── Stats strip ── */
+.statsStrip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5px;
+  border-top: 1px solid var(--glass-border);
+  padding-top: clamp(3rem, 6vh, 5rem);
+}
+
+@media (max-width: 640px) {
+  .statsStrip { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; border-top: none; padding-top: 0; }
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  opacity: 0; /* GSAP */
+}
+
+@media (max-width: 640px) {
+  .statItem { padding: 0; }
+}
+
+.statValue {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--c-white);
+}
+
+.statLabel {
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--c-subtle);
+}

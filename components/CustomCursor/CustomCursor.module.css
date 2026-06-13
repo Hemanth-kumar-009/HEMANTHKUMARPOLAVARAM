@@ -1,0 +1,39 @@
+/* ══════════════════════════════════════════
+   CustomCursor.module.css
+   ══════════════════════════════════════════ */
+
+/* Hide on touch/mobile */
+@media (hover: none) and (pointer: coarse) {
+  .dot, .ring { display: none; }
+}
+
+.dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--c-amber);
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  will-change: transform;
+  mix-blend-mode: difference;
+}
+
+.ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid rgba(232, 160, 80, 0.65);
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  will-change: transform;
+  opacity: 0.65;
+  transition: border-color 0.3s ease;
+}

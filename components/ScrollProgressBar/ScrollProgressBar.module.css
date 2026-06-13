@@ -1,0 +1,29 @@
+/* ══════════════════════════════════════════
+   ScrollProgressBar.module.css
+   ══════════════════════════════════════════ */
+
+.track {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  z-index: 200;
+  background: transparent;
+  pointer-events: none;
+}
+
+.bar {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(
+    to right,
+    var(--c-amber-dim),
+    var(--c-amber),
+    #f5c07a
+  );
+  transform-origin: left center;
+  transform: scaleX(0);
+  will-change: transform;
+  box-shadow: 0 0 8px rgba(232,160,80,0.5);
+}

@@ -1,0 +1,472 @@
+/* ══════════════════════════════════════════════
+   VideoIntro.module.css
+   Cinematic portfolio hero — dark, warm, immersive
+   ══════════════════════════════════════════════ */
+
+/* ── Section shell ── */
+.hero {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  min-height: 600px;
+  overflow: hidden;
+  background: var(--c-void);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  opacity: 0; /* GSAP will fade in */
+  isolation: isolate;
+}
+
+/* ══ Background ambient video ══ */
+.bgVideoWrap {
+  position: absolute;
+  inset: -6%;
+  z-index: 0;
+  filter: blur(52px) saturate(0.6) brightness(0.35);
+  transform: scale(1.08);
+  will-change: transform;
+}
+
+.bgVideo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.bgVideoScrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(2, 2, 3, 0.55);
+}
+
+/* ══ Cinematic gradient overlays ══ */
+.gradientLeft {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(
+    105deg,
+    rgba(2, 2, 3, 0.92) 0%,
+    rgba(8, 8, 16, 0.72) 35%,
+    transparent 58%
+  );
+  pointer-events: none;
+}
+
+.gradientRight {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(
+    to left,
+    rgba(2, 2, 3, 0.75) 0%,
+    transparent 45%
+  );
+  pointer-events: none;
+}
+
+.gradientBottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 45%;
+  z-index: 2;
+  background: linear-gradient(
+    to top,
+    rgba(2, 2, 3, 0.95) 0%,
+    rgba(2, 2, 3, 0.5) 40%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+.gradientTop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 28%;
+  z-index: 2;
+  background: linear-gradient(
+    to bottom,
+    rgba(2, 2, 3, 0.8) 0%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+.vignetteRing {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: radial-gradient(
+    ellipse 110% 90% at 62% 50%,
+    transparent 30%,
+    rgba(2, 2, 3, 0.5) 65%,
+    rgba(2, 2, 3, 0.88) 100%
+  );
+  pointer-events: none;
+}
+
+/* ══ Foreground (subject) video ══ */
+.fgVideoWrap {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  /* Sits right-of-center, fills ~55% of viewport width */
+  width: clamp(340px, 58vw, 880px);
+  z-index: 3;
+  overflow: hidden;
+}
+
+.fgVideo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  pointer-events: none;
+  display: block;
+}
+
+.fgVideoMask {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to right, rgba(2,2,3,0.92) 0%, transparent 22%),
+    linear-gradient(to bottom, rgba(2,2,3,0.6) 0%, transparent 12%, transparent 72%, rgba(2,2,3,0.9) 100%);
+  pointer-events: none;
+}
+
+/* ══ Content overlay ══ */
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.content {
+  position: relative;
+  z-index: 5;
+  padding: clamp(2rem, 6vw, 8rem);
+  padding-right: 0;
+  max-width: 52%;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ── Tagline ── */
+.tagline {
+  display: block;
+  font-family: var(--font-body);
+  font-size: clamp(0.6rem, 0.85vw, 0.72rem);
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--c-amber);
+  margin-bottom: clamp(1.2rem, 3vh, 2rem);
+  opacity: 0; /* GSAP */
+  position: relative;
+}
+
+.tagline::before {
+  content: '';
+  display: inline-block;
+  width: 1.8em;
+  height: 1px;
+  background: var(--c-amber);
+  vertical-align: middle;
+  margin-right: 0.7em;
+  opacity: 0.6;
+}
+
+/* ── Name ── */
+.name {
+  display: flex;
+  flex-direction: column;
+  line-height: 0.88;
+  margin-bottom: clamp(1.4rem, 3vh, 2.2rem);
+}
+
+.firstName,
+.lastName {
+  font-family: var(--font-display);
+  font-size: clamp(4.5rem, 9.5vw, 10.5rem);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  color: var(--c-white);
+  opacity: 0; /* GSAP */
+  will-change: transform, opacity;
+  line-height: 0.92;
+  /* Subtle text shadow for depth */
+  text-shadow:
+    0 0 80px rgba(232, 160, 80, 0.12),
+    0 4px 24px rgba(0, 0, 0, 0.7);
+}
+
+.lastName {
+  /* Offset right for staggered feel */
+  padding-left: clamp(0.5rem, 1.5vw, 1.8rem);
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(244, 240, 234, 0.75);
+  text-shadow:
+    0 0 60px rgba(232, 160, 80, 0.1),
+    0 0 120px rgba(168, 200, 240, 0.08);
+}
+
+/* ── Role subtitle ── */
+.role {
+  font-family: var(--font-body);
+  font-size: clamp(0.85rem, 1.2vw, 1.05rem);
+  font-weight: 300;
+  line-height: 1.85;
+  color: rgba(244, 240, 234, 0.5);
+  opacity: 0; /* GSAP */
+  max-width: 38ch;
+  letter-spacing: 0.01em;
+}
+
+.role em {
+  font-style: italic;
+  color: rgba(244, 240, 234, 0.72);
+  font-weight: 400;
+}
+
+/* ══ Controls (glassmorphism) ══ */
+.controls {
+  position: absolute;
+  top: clamp(1.5rem, 4vh, 3rem);
+  right: clamp(1.5rem, 3vw, 2.5rem);
+  z-index: 100;
+  display: flex;
+  gap: 0.6rem;
+  opacity: 0; /* GSAP */
+}
+
+.controlBtn {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  border: 1px solid var(--glass-border);
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  color: rgba(244, 240, 234, 0.7);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    background 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease,
+    transform 0.2s var(--ease-back);
+  outline: none;
+  padding: 0;
+}
+
+.controlBtn svg {
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+}
+
+.controlBtn:hover {
+  background: rgba(232, 160, 80, 0.12);
+  border-color: rgba(232, 160, 80, 0.35);
+  color: var(--c-amber);
+  transform: scale(1.08);
+}
+
+.controlBtn:active {
+  transform: scale(0.95);
+}
+
+.controlBtn:focus-visible {
+  outline: 2px solid var(--c-amber);
+  outline-offset: 3px;
+}
+
+/* ══ Sound badge ══ */
+.soundBadge {
+  position: absolute;
+  top: clamp(1.2rem, 3vh, 2rem);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 1rem 0.45rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid var(--glass-border);
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: rgba(244, 240, 234, 0.6);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.3s ease, border-color 0.3s ease;
+  animation: badgeFadeIn 0.8s var(--ease-expo) 2s both;
+}
+
+.soundBadge:hover {
+  color: var(--c-amber);
+  border-color: rgba(232, 160, 80, 0.3);
+}
+
+.soundDot {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: var(--c-amber);
+  animation: dotPulse 1.6s ease-in-out infinite;
+}
+
+@keyframes dotPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.7); }
+}
+
+@keyframes badgeFadeIn {
+  from { opacity: 0; transform: translateX(-50%) translateY(-6px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+/* ══ Scroll indicator ══ */
+.scrollIndicator {
+  position: absolute;
+  bottom: clamp(1.5rem, 4vh, 3rem);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  background: none;
+  border: none;
+  outline: none;
+  opacity: 0; /* GSAP */
+  color: rgba(244, 240, 234, 0.4);
+  transition: color 0.3s ease;
+}
+
+.scrollIndicator:hover {
+  color: var(--c-amber);
+}
+
+.scrollIndicator:focus-visible {
+  outline: 2px solid var(--c-amber);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+.scrollLabel {
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.scrollLine {
+  display: block;
+  width: 1px;
+  height: 3rem;
+  background: rgba(244, 240, 234, 0.15);
+  position: relative;
+  overflow: hidden;
+  border-radius: 1px;
+}
+
+.scrollPulse {
+  display: block;
+  position: absolute;
+  top: -100%;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(to bottom, transparent, var(--c-amber), transparent);
+  animation: scrollPulse 2s ease-in-out infinite;
+  border-radius: 1px;
+}
+
+@keyframes scrollPulse {
+  0%   { transform: translateY(0%); opacity: 0; }
+  20%  { opacity: 1; }
+  80%  { opacity: 1; }
+  100% { transform: translateY(400%); opacity: 0; }
+}
+
+/* ══ Responsive ══ */
+@media (max-width: 768px) {
+  .content {
+    max-width: 90%;
+    padding: 2rem 1.5rem;
+  }
+
+  .fgVideoWrap {
+    width: 100%;
+    opacity: 0.4;
+  }
+
+  .fgVideoMask {
+    background:
+      linear-gradient(to right, rgba(2,2,3,0.4) 0%, transparent 30%),
+      linear-gradient(to bottom, rgba(2,2,3,0.7) 0%, transparent 15%, transparent 65%, rgba(2,2,3,0.98) 100%);
+  }
+
+  .gradientLeft {
+    background: linear-gradient(
+      to bottom,
+      rgba(2, 2, 3, 0.7) 0%,
+      rgba(2, 2, 3, 0.5) 50%,
+      rgba(2, 2, 3, 0.85) 100%
+    );
+  }
+
+  .controls {
+    top: 1rem;
+    right: 1rem;
+  }
+
+  .controlBtn {
+    width: 2.2rem;
+    height: 2.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .content {
+    padding: 1.5rem 1.2rem;
+    max-width: 100%;
+  }
+
+  .soundBadge {
+    font-size: 0.65rem;
+    padding: 0.38rem 0.8rem 0.38rem 0.6rem;
+  }
+}
+.controls {
+  position: fixed !important;
+  bottom: 2rem !important;
+  right: 2rem !important;
+  top: auto !important;
+  z-index: 9999 !important;
+  background: rgba(232, 160, 80, 0.15) !important;
+  padding: 0.5rem !important;
+  border-radius: 999px !important;
+  border: 1px solid rgba(232, 160, 80, 0.4) !important;
+}
